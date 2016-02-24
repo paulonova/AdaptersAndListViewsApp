@@ -41,7 +41,7 @@ public class MyCustomAdapter extends ArrayAdapter {
 
     // Vi överskuggar metoden getView för att använda vår komplexa layout
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
 
 
