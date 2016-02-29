@@ -68,14 +68,7 @@ public class MyCarArrayAdapter extends ArrayAdapter<Car> {
             myViewHolder.topText = (TextView) itemView.findViewById(R.id.top_text);
             myViewHolder.bottomText = (TextView) itemView.findViewById(R.id.bottom_text);
 
-            // Using setOnItemListener... (not working)
-//            final ListView lv = (ListView) itemView.findViewById(R.id.my_list_view);
-//            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    lv.setVisibility(View.GONE);
-//                }
-//            });
+
 
             // Spara information om vart allt detta finns
             itemView.setTag(myViewHolder);
