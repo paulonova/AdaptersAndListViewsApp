@@ -2,6 +2,8 @@ package se.oscarb.adaptersandlistviews;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Instansvariabel
     ArrayList<String> carStrings;
-    Context context;
 
 
     @Override
@@ -40,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Skapa adapter med egen TextView
         ArrayAdapter<String> myBuiltInArrayAdapter = new ArrayAdapter<>(this,
-                R.layout.my_text_view,
-                carStrings);
+                R.layout.my_text_view, carStrings);
 
         // Eller
 
@@ -59,32 +59,39 @@ public class MainActivity extends AppCompatActivity {
 
         myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Position: " + position + " id: " + id, Toast.LENGTH_LONG).show();
-                Car carToRemovee = myCarArrayAdapter.getItem(position);
-                myCarArrayAdapter.remove(carToRemovee);
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                // Dialog rutan
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+                alertDialogBuilder.setMessage("Do you want to delete the car?");
+                alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "No car deleted!", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                alertDialogBuilder.setPositiveButton("Delete away!", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "Car deleted!", Toast.LENGTH_LONG).show();
+                        Car carToRemove = myCarArrayAdapter.getItem(position);
+                        myCarArrayAdapter.remove(carToRemove);
+                    }
+                });
+
+                alertDialogBuilder.create();
+                alertDialogBuilder.show();
+
                 return false;
             }
         });
 
-        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                DialogAlertTest alert = new DialogAlertTest();
-                alert.show(getFragmentManager(), "Será que funciona?");
-
-            }
-        });
-
-
-
-
 //        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(MainActivity.this, "Position: " + position + " id: " + id, Toast.LENGTH_LONG).show();
-//                Car carToRemovee = myCarArrayAdapter.getItem(position);
-//                myCarArrayAdapter.remove(carToRemovee);
+//
+//
 //            }
 //        });
 
