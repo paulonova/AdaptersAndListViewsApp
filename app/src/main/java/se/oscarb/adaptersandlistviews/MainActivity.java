@@ -63,8 +63,13 @@ public class MainActivity extends AppCompatActivity implements CustomDialogFragm
         myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
-                DialogFragment dialog = new CustomDialogFragments();
+                CustomDialogFragments dialog = new CustomDialogFragments();
                 setLastClickPosition(position);
+
+                // Vilken bil ska tas bort?
+                Car carToRemove = myCarArrayAdapter.getItem(getLastClickPosition());
+                // Skicka med vilken bil som ska tas bort till dialogrutan
+                dialog.setCar(carToRemove);
                 dialog.show(getSupportFragmentManager(), "CustomDialogFragments");
                 return false;
             }

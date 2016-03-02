@@ -21,6 +21,13 @@ public class CustomDialogFragments extends DialogFragment {
     // Om den gör det så kan vi säga att kod för knapptryck finns
     // definierad i klassen activity pekar på (i vårt fall MainActivity)
     CustomDialogClickListener activity;
+    private Car car;
+
+
+    // Instansmetod
+    public void setCar(Car car) {
+        this.car = car;
+    }
 
 
     /*
@@ -52,7 +59,8 @@ public class CustomDialogFragments extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
-        alertDialogBuilder.setMessage("Do you want to delete the car?");
+        //alertDialogBuilder.setMessage("Do you want to delete the car?");
+        alertDialogBuilder.setMessage("Do you want to delete the " + car.getName() + "?");
         alertDialogBuilder.setTitle("Alert Dialog..");
         alertDialogBuilder.setIcon(R.drawable.ic_favorite_outline_24dp);
         alertDialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
