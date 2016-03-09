@@ -13,7 +13,6 @@ public class Garage {
     // Konstruktor
     public Garage() {
         cars = new ArrayList<>();
-
         addCars();
     }
 
